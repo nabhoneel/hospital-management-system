@@ -1,0 +1,77 @@
+.landing-page {
+  background: #007bff;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+  padding: 1em;
+}
+
+.hero-section p {
+  text-align: center;
+  font-weight: 800;
+  font-size: 2em;
+  text-transform: capitalize;
+  color: #004085;
+  padding: 10px 1em 0;
+}
+
+.logo {
+  width: 8em;
+  border: 5px solid red;
+  border-radius: 5em;
+}
+
+.hero-section img {
+  width: 100%;
+  padding: 1em;
+}
+
+.login-register {
+  width: 40%;
+  min-height: 70vh;
+  border: 1px solid #dae0e5;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.19);
+}
+
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
