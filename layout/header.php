@@ -1,6 +1,9 @@
 <?php
+
+$site_name = "hospital-system";
+
 function addStyleSheet($stylesheet) {
-  $site_name = "hospital-system";
+  global $site_name;
   ?>
 
   <head>

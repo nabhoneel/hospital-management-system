@@ -4,7 +4,18 @@
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  <div class="alert alert-danger" role="alert" id="warning" style = "display: none;"></div>
+  <br>
+  <?php
+  if(isset($_COOKIE['from'])) {
+    ?>
+    <div class="alert alert-danger" role="alert" id="warning">You need to sign in first</div>
+    <?php
+  } else {
+    ?>
+    <div class="alert alert-danger" role="alert" id="warning" style = "display: none;"></div>
+    <?php
+  }
+  ?>
 </form>
 
 <script>
@@ -25,7 +36,7 @@ window.onload = function() {
           password: password
         },
         success: function(response) {
-          if(response == 1) window.location.replace('profile.php');
+          if(response == 1) window.location.replace('dashboard');
           else {
             document.querySelector('#warning').style.display = 'block';
             document.querySelector('#warning').innerHTML = response;
