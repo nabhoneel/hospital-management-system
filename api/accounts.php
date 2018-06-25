@@ -3,7 +3,6 @@
 include_once('./config/Database.php');
 include_once('./models/Accounts.php');
 
-
 $database = new Database();
 $db = $database->connect();
 $accounts = new Accounts($db);
