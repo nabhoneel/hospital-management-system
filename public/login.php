@@ -47,6 +47,6 @@
 </div>
 
 <footer>
-  <?php echo load_default_scripts(); ?>
-  <?php echo set_script('login.js'); ?>
+  <?php load_default_scripts(); ?>
+  <?php set_script('login.js'); ?>
 </footer>

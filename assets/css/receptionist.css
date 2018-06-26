@@ -1,0 +1,17 @@
+#v-pills-tabContent {
+  background: #ddd;
+  height: 100%;
+}
+
+.col-1, .col-11 {
+  padding: 0;
+  height: 100%;
+}
+
+.col-11 {
+  overflow-y: scroll;
+}
+
+.row {
+  margin: 0;
+}
