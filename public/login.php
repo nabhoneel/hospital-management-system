@@ -1,3 +1,5 @@
+<?php if(is_valid_user()) redirect('/dashboard'); ?>
+
 <head>
   <?php set_title('S3N HMS'); ?>
   <?php load_default_stylesheets(); ?>

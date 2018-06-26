@@ -43,8 +43,8 @@ function get_assets() {
 function load_default_stylesheets() {
   ?>
   <link rel="stylesheet" href="<?php echo get_assets(); ?>/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo get_assets(); ?>/css/master.css">
   <link rel="stylesheet" href="<?php echo get_assets(); ?>/css/fontawesome.css">
+  <link rel="stylesheet" href="<?php echo get_assets(); ?>/css/master.css">
   <?php
 }
 
@@ -117,3 +117,18 @@ function redirect($url, $statusCode = 303)
 UI elements:
 
 */
+
+/*
+
+Doctor details:
+
+*/
+
+function get_specializations() {
+  $db = new Database();
+  $doctors = new Doctors($db->connect());
+
+  $specializations = $doctors->get_specializations();
+
+  return $specializations;
+}

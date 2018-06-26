@@ -4,11 +4,11 @@ window.onload = function() {
     e.preventDefault();
     let username = document.querySelector('#inputEmail').value;
     let password = document.querySelector('#inputPassword').value;
-    
+
     jQuery(function($) {
       $.ajax({
-        url: "./api/accounts.php",
-        method: 'post',
+        url: "/hospital-system/api/accounts.php",
+        type: 'post',
         data: {
           username: username,
           password: password

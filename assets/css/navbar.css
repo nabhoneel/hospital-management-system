@@ -7,29 +7,7 @@ img {
   border-radius: 5em;
 }
 
-.navbar-brand {
+.navbar-brand, .navbar-brand sup {
   text-transform: uppercase;
-}
-
-.nav-pills {
-  background: #000;
-  height: 100%;
-}
-
-.nav-link {
-  border-radius: 0 !important;
-  text-align: center;
-}
-
-.nav-link {
-  color: #dee2e6 !important;
-  padding: 2em 0;
-}
-
-.nav-link.active {
-  color: white !important;
-}
-
-.nav-link svg {
-  font-size: 2em;
+  font-family: 'Montserrat Black';
 }

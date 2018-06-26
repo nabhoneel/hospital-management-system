@@ -54,8 +54,6 @@
   </div>
 </div>
 
-
-
 <footer>
   <?php load_default_scripts(); ?>
   <?php set_script('receptionist.js'); ?>
