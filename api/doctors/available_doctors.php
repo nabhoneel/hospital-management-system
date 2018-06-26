@@ -40,7 +40,7 @@ if(mysqli_num_rows($available_doctors) == 0) {
       <td><?php echo $item['date']; ?> at <?php echo $item['time']; ?></td>
       <td><?php echo $item['visit-fees']; ?></td>
       <td>
-        <button class="btn btn-outline-primary btn-sm" id="<?php echo $item['id']; ?>">
+        <button class="btn btn-outline-primary btn-sm" onclick="bookDoctor('<?php echo $item['id']; ?>', '<?php echo $item['datetime']; ?>')" id="<?php echo $item['id']; ?>">
            Book
         </button>
       </td>

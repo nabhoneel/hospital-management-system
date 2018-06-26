@@ -4,6 +4,7 @@
   <?php set_title(get_name() . '\'s dashboard'); ?>
   <?php load_default_stylesheets(); ?>
   <?php set_stylesheet('receptionist.css'); ?>
+  <?php set_stylesheet('sidebar_style.css'); ?>
 </head>
 
 <div class="row" style="width: 100%;">

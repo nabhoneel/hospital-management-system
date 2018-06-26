@@ -53,5 +53,7 @@
     </div>
   </div>
 
+  <div class="booking-status"></div>
   <div class="allot-results"></div>
+
 </div>

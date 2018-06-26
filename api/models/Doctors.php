@@ -25,7 +25,7 @@ class Doctors {
   // IDs of available doctors:
   public function get_available_doctors($name, $specialization, $date, $time) {
     $query = 'SELECT
-                s.`id`, `name`, `specialization`, DATE_FORMAT(`datetime`, "%d %M %Y") AS "date", DATE_FORMAT(`datetime`, "%h : %i %p") AS "time", `visit-fees`
+                s.`id`, `name`, `specialization`, `datetime`, DATE_FORMAT(`datetime`, "%d %M %Y") AS "date", DATE_FORMAT(`datetime`, "%h : %i %p") AS "time", `visit-fees`
               FROM
                 `' . $this->table . '` s INNER JOIN `doctor-schedule`
               WHERE
@@ -47,6 +47,21 @@ class Doctors {
 
     $stmt->close();
     return $result;
+  }
+
+  // Book a doctor with specified id at given timeslot:
+  public function book($id, $datetime) {
+    $query = 'UPDATE `doctor-schedule` SET `status` = "booked" WHERE `id` = ? AND `datetime` = ?';
+    try {
+      $stmt = $this->conn->prepare($query);
+      $stmt->bind_param("ss", $id, $datetime);
+      $stmt->execute();
+      return true;
+    } catch(Exception $e) {
+      return false;
+    }
+
+    $stmt->close();
   }
 
   // List of specializations of doctors:

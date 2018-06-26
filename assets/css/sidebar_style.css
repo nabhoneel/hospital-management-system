@@ -1,0 +1,50 @@
+/*
+
+sidebar styling:
+
+*/
+
+#v-pills-tabContent {
+  background: #ddd;
+  height: 100%;
+}
+
+.col-1, .col-11 {
+  padding: 0;
+  height: 100%;
+}
+
+.col-11 {
+  overflow-y: scroll;
+}
+
+.row {
+  margin: 0;
+}
+
+.nav-pills {
+  background: #000;
+  height: 100%;
+}
+
+.nav-link {
+  border-radius: 0 !important;
+  text-align: center;
+}
+
+.nav-link {
+  color: #dee2e6 !important;
+  padding: 2em 0;
+}
+
+.nav-link:hover {
+  background: var(--indigo);
+}
+
+.nav-link.active {
+  color: white !important;
+}
+
+.nav-link svg {
+  font-size: 2em;
+}
