@@ -6,4 +6,6 @@ if(!function_exists('is_valid_user') || !is_valid_user()) {
   return;
 }
 
+echo 'helllooooo';
+
 ?>
