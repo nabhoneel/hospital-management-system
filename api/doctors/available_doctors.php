@@ -34,17 +34,17 @@ if(mysqli_num_rows($available_doctors) == 0) {
   </thead>
   <tbody>
     <?php foreach($available_doctors as $key => $item) { ?>
-    <tr>
-      <td><?php echo $item['name']; ?></td>
-      <td><?php echo $item['specialization']; ?></td>
-      <td><?php echo $item['date']; ?> at <?php echo $item['time']; ?></td>
-      <td><?php echo $item['visit-fees']; ?></td>
-      <td>
-        <button class="btn btn-outline-primary btn-sm" onclick="bookDoctor('<?php echo $item['id']; ?>', '<?php echo $item['datetime']; ?>')" id="<?php echo $item['id']; ?>">
-           Book
-        </button>
-      </td>
-    </tr>
+      <tr>
+        <td><?php echo $item['name']; ?></td>
+        <td><?php echo $item['specialization']; ?></td>
+        <td><?php echo $item['date']; ?> at <?php echo $item['time']; ?></td>
+        <td><?php echo $item['visit-fees']; ?></td>
+        <td>
+          <button class="btn btn-outline-primary btn-sm" onclick="bookDoctor('<?php echo $item['id']; ?>', '<?php echo $item['name']; ?>', '<?php echo $item['datetime']; ?>')" id="<?php echo $item['id']; ?>">
+            Book
+          </button>
+        </td>
+      </tr>
     <?php } ?>
   </tbody>
 </table>
