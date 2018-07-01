@@ -8,6 +8,7 @@ var patientFormStatus = false;
 
 window.onload = function() {
   setList();
+  setAttendanceList();
 
   document.querySelector('#doctor-name').addEventListener('keyup', function() {
     doctorName = this.value;
@@ -185,3 +186,93 @@ saveNewPatient = function() {
 resetColor = function(e) {
   e.style.borderColor = '#ced4da';
 };
+
+/*
+
+Attendance functions:
+
+*/
+
+var staffSearch = '',
+staffType = document.getElementById('staff-type').value,
+departmentType = document.getElementById('staff-department').value;
+
+setAttendanceList = function() {
+  var data = {
+    searchText: staffSearch,
+    department: staffType == 'doctor' ? departmentType : 0,
+    staffType: staffType
+  };
+
+  jQuery(function($) {
+    $.ajax({
+      url: "/hospital-system/api/staff/show_attendance_log.php",
+      type: 'post',
+      data: JSON.stringify(data),
+      success: function(response) {
+        document.querySelector('.attendance-list').innerHTML = response;
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  });
+};
+
+setEntryTime = function(e, id) {
+  jQuery(function($) {
+    $.ajax({
+      url: "/hospital-system/api/staff/set_entry_time.php",
+      method: 'post',
+      data: JSON.stringify({id: id}),
+      success: function(response) {
+        var x = e;
+        x = x.parentElement.parentElement.childNodes;
+        console.log(x);
+        x[11].childNodes[1].removeAttribute('disabled');
+        // x.parentElement.parentElement.childNodes[x.parentElement.parentElement.childNodes.length - 1].removeAttribute('disabled');
+        // .nextSibling.childNodes[0].removeAttribute('disabled');
+        e.parentElement.innerHTML = response;
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  });
+};
+
+setExitTime = function(e, id) {
+  jQuery(function($) {
+    $.ajax({
+      url: "/hospital-system/api/staff/set_exit_time.php",
+      method: 'post',
+      data: JSON.stringify({id: id}),
+      success: function(response) {
+        e.parentElement.innerHTML = response;
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  });
+};
+
+document.getElementById('staff-type').addEventListener('change', function() {
+  staffType = this.value;
+  if(this.value != 'doctor') {
+    document.getElementById('staff-department').setAttribute('disabled', 'true');
+  } else {
+    document.getElementById('staff-department').removeAttribute('disabled');
+  }
+  setAttendanceList();
+});
+
+document.getElementById('staff-department').addEventListener('change', function() {
+  departmentType = this.value;
+  setAttendanceList();
+});
+
+document.getElementById('staff-search').addEventListener('keyup', function() {
+  staffSearch = this.value;
+  setAttendanceList();
+});

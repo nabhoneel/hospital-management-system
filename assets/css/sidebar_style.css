@@ -6,7 +6,7 @@ sidebar styling:
 
 #v-pills-tabContent {
   background: #ddd;
-  height: 100%;
+  min-height: 100vh;
 }
 
 .col-1, .col-11 {

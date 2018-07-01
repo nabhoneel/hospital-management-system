@@ -13,7 +13,9 @@ Helper functions are included below:
 include_once('./lib/functions.php');
 include_once('./api/config/Database.php');
 include_once('./api/models/Doctors.php');
+include_once('./api/models/Staff_Details.php');
 
+date_default_timezone_set("Asia/Kolkata");
 // echo get_url() . '<br>';
 // echo get_requested_url();
 

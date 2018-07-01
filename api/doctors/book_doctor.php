@@ -2,7 +2,7 @@
 
 include_once('../config/Database.php');
 include_once('../models/Doctors.php');
-include_once('../models/Treatment_details.php');
+include_once('../models/Treatment_Details.php');
 
 $db = new Database();
 $doctors = new Doctors($db->connect());

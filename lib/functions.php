@@ -107,13 +107,17 @@ function get_role() {
 }
 
 function get_all_roles() {
-  return array(
-    'doctor',
-    'staff_head',
-    'receptionist',
-    'admin',
-    'account_manager'
-  );
+  $db = new Database();
+  $staff_details = new StaffDetails($db->connect());
+
+  return $staff_details->get_roles();
+}
+
+function get_departments() {
+  $db = new Database();
+  $doctors = new Doctors($db->connect());
+
+  return $doctors->get_specializations();
 }
 
 function redirect($url, $statusCode = 303)
