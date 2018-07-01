@@ -106,10 +106,31 @@ function get_role() {
   }
 }
 
+function get_all_roles() {
+  return array(
+    'doctor',
+    'staff_head',
+    'receptionist',
+    'admin',
+    'account_manager'
+  );
+}
+
 function redirect($url, $statusCode = 303)
 {
   header('Location: ' . get_homeurl() . $url, true, $statusCode);
   die();
+}
+
+/*
+
+Get database connection variable:
+
+*/
+
+function get_database() {
+  $db = new Database();
+  return ($db->connect());
 }
 
 /*

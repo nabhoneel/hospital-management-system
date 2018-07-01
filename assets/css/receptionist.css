@@ -1,1 +1,73 @@
+.available-doctors {
+  color: darkgray;
+  font-size: 2em;
+}
 
+.row {
+  text-align: center;
+  margin: 0;
+  align-items: center;
+}
+
+.allot {
+  padding: 1em;
+}
+
+.table {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.patient-search-allot {
+  padding: 10px 0 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.patient-details {
+  padding: 1em 0;
+}
+
+.patient-detail {
+  text-align: left;
+  padding: 10px 10px;
+  background-color: #eee;
+  font-size: 1.1em;
+  font-weight: 800;
+}
+
+.search-results {
+  width: fit-content;
+  border-left: 1px solid #dedede;
+  border-right: 1px solid #dedede;
+}
+
+.search-result {
+  display: inline-grid;
+  grid-gap: 2px 20px;
+  grid-template-columns: auto auto;
+  border-bottom: 1px solid #dedede;
+  padding: 10px;
+  width: 100%;
+}
+
+.search-result:hover {
+  background-color: #ededed;
+  cursor: pointer;
+}
+
+.result-name {
+  text-align: left;
+}
+
+.result-email {
+  text-align: right;
+}
+
+.new-patient-form {
+  display: none;
+}
+
+.new-patient-form .alert {
+  display: none;
+}

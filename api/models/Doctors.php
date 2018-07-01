@@ -23,25 +23,33 @@ class Doctors {
   }
 
   // IDs of available doctors:
-  public function get_available_doctors($name, $specialization, $date, $time) {
+  public function get_available_doctors($name, $department_id, $date, $time) {
     $query = 'SELECT
-                s.`id`, `name`, `specialization`, `datetime`, DATE_FORMAT(`datetime`, "%d %M %Y") AS "date", DATE_FORMAT(`datetime`, "%h : %i %p") AS "time", `visit-fees`
+              	s.`id`,
+                  `name`,
+                  `department`,
+                  `datetime`,
+                  DATE_FORMAT(`datetime`, "%d %M %Y") AS "date",
+                  DATE_FORMAT(`datetime`, "%h : %i %p") AS "time",
+                  `visit-fees`
               FROM
-                `' . $this->table . '` s INNER JOIN `doctor-schedule`
+              	`staff-details` s, `doctor-schedule` d
               WHERE
-                s.`role` = "Doctor" AND
-                s.`name` LIKE ? AND
-                s.`specialization` LIKE ? AND
-                `datetime` > ? AND
-                `status` = "free"
-              ORDER BY s.`name`';
+                  s.`id` = d.`id` AND
+                  s.`role` = "doctor" AND
+                  s.`name` LIKE ? AND
+                  s.`department` = ? AND
+                  `datetime` >= ? AND
+                  `status` = "free"
+              ORDER BY s.`name`, `datetime`';
 
-    $datetime = $date . ' ' . $time;
-    $name = $name . "%";
-    $specialization = $specialization . "%";
+    $datetime = $date == '' ? date('Y-m-d H:i:s') : ($date . ' ' . $time);
+    $name = "%" . $name . "%";
+    $department_id = $department_id . "%";
+    // echo $query;
 
     $stmt = $this->conn->prepare($query);
-    $stmt->bind_param("sss", $name, $specialization, $datetime);
+    $stmt->bind_param("sis", $name, $department_id, $datetime);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -66,8 +74,7 @@ class Doctors {
 
   // List of specializations of doctors:
   public function get_specializations() {
-    $query = 'SELECT DISTINCT `specialization` FROM `' . $this->table . '` WHERE `role` = "Doctor"';
-    echo $query;
+    $query = 'SELECT `department-id`, `description` FROM `department`';
 
     $stmt = $this->conn->prepare($query);
     $stmt->execute();
@@ -75,12 +82,6 @@ class Doctors {
 
     $stmt->close();
 
-    $arr = array();
-    // Converting the rows to an array with numeric indices, specialization values as data:
-    foreach($result as $specialization) {
-      array_push($arr, $specialization['specialization']);
-    }
-
-    return $arr;
+    return $result;
   }
 }

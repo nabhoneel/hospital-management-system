@@ -11,7 +11,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 $available_doctors = $doctors->get_available_doctors(
   $data->name,
-  $data->specialization,
+  $data->department,
   $data->date,
   $data->time
 );
@@ -36,11 +36,11 @@ if(mysqli_num_rows($available_doctors) == 0) {
     <?php foreach($available_doctors as $key => $item) { ?>
       <tr>
         <td><?php echo $item['name']; ?></td>
-        <td><?php echo $item['specialization']; ?></td>
+        <td><?php echo $data->department_name; ?></td>
         <td><?php echo $item['date']; ?> at <?php echo $item['time']; ?></td>
         <td><?php echo $item['visit-fees']; ?></td>
         <td>
-          <button class="btn btn-outline-primary btn-sm" onclick="bookDoctor('<?php echo $item['id']; ?>', '<?php echo $item['name']; ?>', '<?php echo $item['datetime']; ?>')" id="<?php echo $item['id']; ?>">
+          <button class="btn btn-outline-primary btn-sm" onclick="choosePatient('<?php echo $item['id']; ?>', '<?php echo $item['name']; ?>', '<?php echo $item['datetime']; ?>')" id="<?php echo $item['id']; ?>">
             Book
           </button>
         </td>

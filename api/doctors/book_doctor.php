@@ -2,15 +2,18 @@
 
 include_once('../config/Database.php');
 include_once('../models/Doctors.php');
+include_once('../models/Treatment_details.php');
 
 $db = new Database();
 $doctors = new Doctors($db->connect());
+$treatment = new TreatmentDetails($db->connect());
 
 //Get raw posted JSON data:
 $data = json_decode(file_get_contents("php://input"));
 
-if($doctors->book($data->id, $data->slot) == true) :
-  ?>
+$treatment_status = $treatment->add_detail($data->patientID, $data->doctorID, 'single visit');
+$doctor_status = $doctors->book($data->doctorID, $data->slot);
+if($treatment_status && $doctor_status) : ?>
 
   <div class="alert alert-success alert-dismissible fade show" role="alert">
     Booking successful!

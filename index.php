@@ -19,8 +19,10 @@ include_once('./api/models/Doctors.php');
 
 if(get_url() == get_homeurl() . '/') {
   include_once('public/login.php');
-} else {
+} elseif(get_requested_url() == 'dashboard') {
   include 'public/' . get_requested_url() . '.php';
+} else {
+  include_once(get_url());
 }
 
 ?>
