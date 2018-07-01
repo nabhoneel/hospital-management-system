@@ -1,4 +1,4 @@
-<?php set_title('Nurse details'); ?>
+<title>Nurse Details</title>
 <body>
 
   <?php

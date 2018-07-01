@@ -1,5 +1,6 @@
 <?php
-$temp=mysqli_connect("localhost", "root", "","hospital-system");
+$db = new Database();
+$temp = $db->connect();
 ?>
 
 <style>
@@ -50,7 +51,6 @@ $temp=mysqli_connect("localhost", "root", "","hospital-system");
     <input type="reset">
   </form>
 
-</div>
 <br><br>
 
 <h3>Allocate Nurse</h3>
@@ -111,6 +111,5 @@ $temp=mysqli_connect("localhost", "root", "","hospital-system");
     <input type="reset">
   </form>
 
-  <div>
 
-    <?php set_script('staffhead.js'); ?>
+  <?php set_script('staffhead.js'); ?>
