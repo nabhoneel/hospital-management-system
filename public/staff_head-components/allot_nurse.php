@@ -1,8 +1,7 @@
 <?php
 /* Attempt MySQL server connection. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
-$db = new Database();
-$link = $db->connect();
+$link = mysqli_connect("localhost", "root", "","hospital-system");
 $err=0;
 // Check connection
 if($link === false){
