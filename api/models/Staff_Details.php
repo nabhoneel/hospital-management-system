@@ -5,6 +5,7 @@ class StaffDetails {
   private $table = 'staff-details';
 
   public function __construct($db) {
+    date_default_timezone_set("Asia/Kolkata");
     $this->conn = $db;
   }
 

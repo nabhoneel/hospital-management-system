@@ -130,17 +130,14 @@ togglePatientForm = function() {
   patientFormStatus = !patientFormStatus;
 };
 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
 saveNewPatient = function(formName) {
   var patientFields = document.querySelectorAll('.' + formName + ' .form-control');
-  for (var i = 0; i < patientFields.length; i++) {
-    if(patientFields[i].value == '') {
-      patientFields[i].style.borderColor = 'red';
-      return;
-    } else {
-      patientFields[i].style.borderColor = '#ced4da';
-    }
-  }
-
+  
   var data = {
     name: patientFields[0].value,
     sex: patientFields[1].value,
@@ -149,6 +146,38 @@ saveNewPatient = function(formName) {
     address: patientFields[4].value,
     dob: patientFields[5].value
   };
+  
+  for(var i=0; i<10; i++) {
+	if(data.name.trim().indexOf(i.toString()) != -1) {		
+		console.log('wrong');
+		patientFields[0].style.borderColor = 'red';
+		return;
+	}
+  }  
+  
+  if(data.contact.trim().length != 10) {
+	patientFields[2].style.borderColor = 'red';
+	return;
+  }
+  
+  if(!validateEmail(data.email)) {
+	  patientFields[3].style.borderColor = 'red';
+	  return;
+  }
+  
+  if(data.address.trim().length == 0) {
+	  patientFields[4].style.borderColor = 'red';
+	  return;
+  }
+  
+  for (var i = 0; i < patientFields.length; i++) {
+    if(patientFields[i].value == '') {
+      patientFields[i].style.borderColor = 'red';
+      return;
+    } else {
+      patientFields[i].style.borderColor = '#ced4da';
+    }
+  }
 
   console.log(data);
 

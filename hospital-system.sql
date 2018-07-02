@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2018 at 09:49 PM
+-- Generation Time: Jul 02, 2018 at 07:15 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -43,12 +43,18 @@ CREATE TABLE `admission-history` (
 
 INSERT INTO `admission-history` (`patient-id`, `doctor-id`, `room-id`, `admission-date`, `discharge-date`, `status`) VALUES
 (1, 73, 1, '2016-01-20 13:00:00', '2016-01-23 06:00:00', 'Transferred'),
+(1, 1, 13, '2018-07-02 00:40:36', '0000-00-00 00:00:00', 'Discharged'),
 (2, 79, 2, '2017-10-12 07:05:00', '2017-10-20 11:07:00', 'Cured'),
+(2, 71, 23, '2018-07-02 00:45:06', '0000-00-00 00:00:00', 'Cured'),
 (3, 97, 3, '2016-02-14 16:00:00', '2016-02-14 18:00:00', 'Transferred'),
+(3, 6, 38, '2018-07-02 00:47:48', '0000-00-00 00:00:00', 'Under Treatment'),
 (4, 73, 4, '2016-07-03 02:30:00', '2016-07-03 05:10:00', 'Expired'),
+(4, 8, 85, '2018-07-02 00:42:23', '0000-00-00 00:00:00', 'Under Treatment'),
 (5, 59, 5, '2015-05-17 10:00:00', '2015-05-27 11:00:00', 'Cured'),
+(5, 1, 14, '2018-07-02 00:44:14', '0000-00-00 00:00:00', 'Under Treatment'),
 (6, 16, 6, '2018-02-24 06:00:00', '2018-02-26 11:00:00', 'Cured'),
 (7, 38, 7, '2017-04-06 19:00:00', '2017-04-12 11:00:00', 'Cured'),
+(7, 17, 55, '2018-07-02 00:48:19', '0000-00-00 00:00:00', 'Under Treatment'),
 (8, 58, 15, '2018-02-09 08:00:00', '2018-02-10 05:00:00', 'Transferred'),
 (9, 28, 16, '2017-07-10 10:00:00', '2017-07-10 13:10:00', 'Expired'),
 (10, 60, 17, '2017-07-10 10:00:00', '2017-07-10 11:00:00', 'Expired'),
@@ -352,9 +358,21 @@ INSERT INTO `admission-history` (`patient-id`, `doctor-id`, `room-id`, `admissio
 CREATE TABLE `attendance` (
   `id` int(10) NOT NULL,
   `date` date NOT NULL,
-  `entry-time` time DEFAULT NULL,
+  `entry-time` time NOT NULL,
   `exit-time` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`id`, `date`, `entry-time`, `exit-time`) VALUES
+(20, '2018-07-02', '21:52:25', '21:52:37'),
+(50, '2018-07-02', '10:53:06', '10:53:26'),
+(52, '2018-07-02', '21:52:42', NULL),
+(79, '2018-07-02', '18:18:58', '18:21:43'),
+(131, '2018-07-02', '18:16:08', '18:16:20'),
+(139, '2018-07-02', '22:02:06', '22:44:47');
 
 -- --------------------------------------------------------
 
@@ -430,11 +448,11 @@ INSERT INTO `doctor-schedule` (`id`, `datetime`, `day-of-week`, `visit-fees`, `p
 (1, '1970-01-01 01:00:00', 'Thursday', 400, 20, 300, 'free'),
 (1, '2018-07-01 12:00:00', 'Sunday', 800, 20, 700, 'free'),
 (1, '2018-07-02 12:00:00', 'Monday', 700, 20, 600, 'free'),
-(1, '2018-07-03 04:00:00', 'Tuesday', 700, 20, 600, 'free'),
+(1, '2018-07-03 04:00:00', 'Tuesday', 700, 20, 600, 'booked'),
 (1, '2018-07-03 12:00:00', 'Tuesday', 500, 20, 400, 'free'),
 (1, '2018-07-04 12:00:00', 'Wednesday', 500, 20, 400, 'free'),
 (1, '2018-07-05 04:00:00', 'Thursday', 800, 20, 700, 'free'),
-(1, '2018-07-05 12:00:00', 'Thursday', 800, 20, 700, 'free'),
+(1, '2018-07-05 12:00:00', 'Thursday', 800, 20, 700, 'booked'),
 (1, '2018-07-06 04:00:00', 'Friday', 500, 20, 400, 'free'),
 (1, '2018-07-06 06:00:00', 'Friday', 800, 20, 700, 'free'),
 (1, '2018-07-07 04:00:00', 'Saturday', 700, 20, 600, 'free'),
@@ -678,8 +696,8 @@ INSERT INTO `doctor-schedule` (`id`, `datetime`, `day-of-week`, `visit-fees`, `p
 (20, '1970-01-01 01:00:00', 'Thursday', 500, 20, 400, 'free'),
 (20, '2018-07-01 08:00:00', 'Sunday', 400, 20, 300, 'free'),
 (20, '2018-07-01 10:00:00', 'Sunday', 700, 20, 600, 'free'),
-(20, '2018-07-02 10:00:00', 'Monday', 400, 20, 300, 'free'),
-(20, '2018-07-02 12:00:00', 'Monday', 500, 20, 400, 'free'),
+(20, '2018-07-02 10:00:00', 'Monday', 400, 20, 300, 'booked'),
+(20, '2018-07-02 12:00:00', 'Monday', 500, 20, 400, 'booked'),
 (20, '2018-07-03 04:00:00', 'Tuesday', 500, 20, 400, 'free'),
 (20, '2018-07-03 10:00:00', 'Tuesday', 400, 20, 300, 'free'),
 (20, '2018-07-04 04:00:00', 'Wednesday', 500, 20, 400, 'free'),
@@ -1312,7 +1330,7 @@ INSERT INTO `doctor-schedule` (`id`, `datetime`, `day-of-week`, `visit-fees`, `p
 (67, '2018-07-02 04:00:00', 'Monday', 800, 20, 700, 'free'),
 (67, '2018-07-02 08:00:00', 'Monday', 400, 20, 300, 'free'),
 (67, '2018-07-03 08:00:00', 'Tuesday', 500, 20, 400, 'free'),
-(67, '2018-07-04 10:00:00', 'Wednesday', 400, 20, 300, 'free'),
+(67, '2018-07-04 10:00:00', 'Wednesday', 400, 20, 300, 'booked'),
 (67, '2018-07-04 12:00:00', 'Wednesday', 700, 20, 600, 'free'),
 (67, '2018-07-05 04:00:00', 'Thursday', 700, 20, 600, 'free'),
 (67, '2018-07-05 10:00:00', 'Thursday', 700, 20, 600, 'free'),
@@ -1800,18 +1818,18 @@ INSERT INTO `nurse-duty` (`nurse-id`, `room-id`, `shift`, `holiday`) VALUES
 (104, 0, 'Morning', 'Thursday'),
 (105, 0, 'Morning', 'Friday'),
 (106, 0, 'Morning', 'Saturday'),
-(107, 0, 'Morning', 'Monday'),
+(107, 121, 'Morning', 'Monday'),
 (108, 0, 'Morning', 'Tuesday'),
 (109, 0, 'Morning', 'Wednesday'),
 (110, 0, 'Morning', 'Thursday'),
 (111, 0, 'Morning', 'Friday'),
-(112, 0, 'Morning', 'Saturday'),
+(112, 99, 'Morning', 'Saturday'),
 (113, 0, 'Morning', 'Monday'),
 (114, 0, 'Morning', 'Tuesday'),
-(115, 0, 'Morning', 'Wednesday'),
+(115, 99, 'Morning', 'Wednesday'),
 (116, 0, 'Morning', 'Thursday'),
 (117, 0, 'Morning', 'Friday'),
-(118, 0, 'Morning', 'Saturday'),
+(118, 132, 'Morning', 'Saturday'),
 (119, 0, 'Morning', 'Monday'),
 (120, 0, 'Morning', 'Tuesday'),
 (121, 0, 'Morning', 'Wednesday'),
@@ -1820,12 +1838,12 @@ INSERT INTO `nurse-duty` (`nurse-id`, `room-id`, `shift`, `holiday`) VALUES
 (124, 0, 'Morning', 'Saturday'),
 (125, 0, 'Morning', 'Monday'),
 (126, 0, 'Morning', 'Tuesday'),
-(127, 0, 'Morning', 'Wednesday'),
+(127, 132, 'Morning', 'Wednesday'),
 (128, 0, 'Morning', 'Thursday'),
 (129, 0, 'Morning', 'Friday'),
 (130, 0, 'Morning', 'Saturday'),
 (131, 0, 'Morning', 'Monday'),
-(132, 0, 'Afternoon', 'Tuesday'),
+(132, 173, 'Afternoon', 'Tuesday'),
 (133, 0, 'Afternoon', 'Wednesday'),
 (134, 0, 'Afternoon', 'Thursday'),
 (135, 0, 'Afternoon', 'Friday'),
@@ -1836,13 +1854,13 @@ INSERT INTO `nurse-duty` (`nurse-id`, `room-id`, `shift`, `holiday`) VALUES
 (140, 0, 'Afternoon', 'Thursday'),
 (141, 0, 'Afternoon', 'Friday'),
 (142, 0, 'Afternoon', 'Saturday'),
-(143, 0, 'Afternoon', 'Monday'),
+(143, 144, 'Afternoon', 'Monday'),
 (144, 0, 'Afternoon', 'Tuesday'),
 (145, 0, 'Afternoon', 'Wednesday'),
 (146, 0, 'Afternoon', 'Thursday'),
 (147, 0, 'Afternoon', 'Friday'),
 (148, 0, 'Afternoon', 'Saturday'),
-(149, 0, 'Afternoon', 'Monday'),
+(149, 20, 'Afternoon', 'Monday'),
 (150, 0, 'Afternoon', 'Tuesday'),
 (151, 0, 'Afternoon', 'Wednesday'),
 (152, 0, 'Afternoon', 'Thursday'),
@@ -1850,16 +1868,16 @@ INSERT INTO `nurse-duty` (`nurse-id`, `room-id`, `shift`, `holiday`) VALUES
 (154, 0, 'Afternoon', 'Saturday'),
 (155, 0, 'Afternoon', 'Monday'),
 (156, 0, 'Afternoon', 'Tuesday'),
-(157, 0, 'Afternoon', 'Wednesday'),
+(157, 121, 'Afternoon', 'Wednesday'),
 (158, 0, 'Afternoon', 'Thursday'),
 (159, 0, 'Afternoon', 'Friday'),
 (160, 0, 'Afternoon', 'Saturday'),
-(161, 0, 'Afternoon', 'Monday'),
+(161, 131, 'Afternoon', 'Monday'),
 (162, 0, 'Afternoon', 'Tuesday'),
 (163, 0, 'Night', 'Wednesday'),
 (164, 0, 'Night', 'Thursday'),
 (165, 0, 'Night', 'Friday'),
-(166, 0, 'Night', 'Saturday'),
+(166, 99, 'Night', 'Saturday'),
 (167, 0, 'Night', 'Monday'),
 (168, 0, 'Night', 'Tuesday'),
 (169, 0, 'Night', 'Wednesday'),
@@ -1870,13 +1888,13 @@ INSERT INTO `nurse-duty` (`nurse-id`, `room-id`, `shift`, `holiday`) VALUES
 (174, 0, 'Night', 'Tuesday'),
 (175, 0, 'Night', 'Wednesday'),
 (176, 0, 'Night', 'Thursday'),
-(177, 0, 'Night', 'Friday'),
-(178, 0, 'Night', 'Saturday'),
+(177, 173, 'Night', 'Friday'),
+(178, 129, 'Night', 'Saturday'),
 (179, 0, 'Night', 'Monday'),
 (180, 0, 'Night', 'Tuesday'),
 (181, 0, 'Night', 'Wednesday'),
 (182, 0, 'Night', 'Thursday'),
-(183, 0, 'Night', 'Friday'),
+(183, 58, 'Night', 'Friday'),
 (184, 0, 'Night', 'Saturday'),
 (185, 0, 'Night', 'Monday'),
 (186, 0, 'Night', 'Tuesday'),
@@ -1886,7 +1904,7 @@ INSERT INTO `nurse-duty` (`nurse-id`, `room-id`, `shift`, `holiday`) VALUES
 (190, 0, 'Night', 'Saturday'),
 (191, 0, 'Night', 'Monday'),
 (192, 0, 'Night', 'Tuesday'),
-(193, 0, 'Night', 'Wednesday'),
+(193, 121, 'Night', 'Wednesday'),
 (194, 0, 'Morning', 'Thursday'),
 (195, 0, 'Morning', 'Friday');
 
@@ -2210,7 +2228,17 @@ INSERT INTO `patient` (`id`, `name`, `date-of-birth`, `sex`, `address`, `email-i
 (297, 'Aretha Hebert', '1968-02-05', 'Male', 'P.O. Box 564, 365 Augue St.', 'erat.eget.tincidunt@interdumenim.edu', '9855061769'),
 (298, 'Marvin Clemons', '1965-06-23', 'Male', '341-5521 Vitae, Av.', 'fermentum.metus.Aenean@eliterat.co.uk', '9813429811'),
 (299, 'Orlando Patrick', '1990-03-09', 'Male', '6497 Lorem Av.', 'tellus.Phasellus.elit@anteipsum.net', '9896394249'),
-(300, 'Inga Hahn', '1972-08-01', 'Male', 'P.O. Box 100, 4706 Lorem St.', 'nunc@risusInmi.net', '9831398882');
+(300, 'Inga Hahn', '1972-08-01', 'Male', 'P.O. Box 100, 4706 Lorem St.', 'nunc@risusInmi.net', '9831398882'),
+(301, 'Noobie', '2018-02-28', 'Male', 'something something', 'nabhoneel.59@gmail.com', '9830495123'),
+(302, 'Nabhoneel ', '1995-10-20', 'Male', 'dfd', 'nabhoenel.95@mgaisld.com', '98495039402'),
+(303, 'NM', '2018-07-05', 'Male', 'fsdfd', 'hgshfi', '8493949591'),
+(304, 'Noobie', '1882-02-08', 'Male', 'dfvfuds', 'nabheneffsfd', '9348394989'),
+(305, 'sdfdfdf', '2018-06-29', 'Male', 'dfgsdfgdfsg', 'dfgsfdg', '34234324'),
+(306, 'nm', '2018-06-28', 'Male', 'gsdfgdsfgdfsgdfg', 'shdghdf', '23434324234'),
+(307, 'gdsfgdfsg', '2018-07-10', 'Male', 'dfgsdfgdfsgfdg', 'dfgsdfgdsfg', '34534545'),
+(308, 'nab', '2018-06-30', 'Male', 'dsfadsf', '3sdfbdsfg', '23434'),
+(309, 'jgyugug', '9989-02-11', 'Male', 'tfhh', 'fyugyugy', '6768768'),
+(310, 'dfgfdg', '2018-07-01', 'Male', 'dfdsf', 'klfndskjmfn@gmai.com', '5757575757');
 
 -- --------------------------------------------------------
 
@@ -2222,8 +2250,8 @@ CREATE TABLE `patient-history` (
   `patient-id` int(10) NOT NULL,
   `session-number` int(10) NOT NULL,
   `item-id` int(10) NOT NULL,
-  `quantity` int(10) NOT NULL,
-  `datetime` datetime NOT NULL
+  `quantity` int(10) NOT NULL DEFAULT '1',
+  `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -2231,13 +2259,11 @@ CREATE TABLE `patient-history` (
 --
 
 INSERT INTO `patient-history` (`patient-id`, `session-number`, `item-id`, `quantity`, `datetime`) VALUES
-(1, 1, 113, 1, '2016-01-20 13:00:00'),
 (2, 1, 109, 1, '2017-10-12 07:05:00'),
 (3, 1, 110, 1, '2016-02-14 16:00:00'),
 (4, 1, 113, 1, '2016-07-03 02:30:00'),
 (5, 1, 111, 1, '2015-05-17 10:00:00'),
 (6, 1, 105, 1, '2018-02-24 06:00:00'),
-(7, 1, 110, 1, '2017-04-06 19:00:00'),
 (8, 1, 112, 1, '2018-02-09 08:00:00'),
 (9, 1, 107, 1, '2017-07-10 10:00:00'),
 (10, 1, 106, 1, '2017-07-10 10:00:00'),
@@ -2531,13 +2557,11 @@ INSERT INTO `patient-history` (`patient-id`, `session-number`, `item-id`, `quant
 (298, 1, 110, 1, '2018-07-01 10:20:00'),
 (299, 1, 106, 1, '2018-07-01 10:20:00'),
 (300, 1, 107, 1, '2018-07-01 10:20:00'),
-(1, 1, 1, 1, '2016-01-20 13:00:00'),
 (2, 1, 3, 1, '2017-10-12 07:05:00'),
 (3, 1, 5, 1, '2016-02-14 16:00:00'),
 (4, 1, 8, 1, '2016-07-03 02:30:00'),
 (5, 1, 11, 1, '2015-05-17 10:00:00'),
 (6, 1, 10, 1, '2018-02-24 06:00:00'),
-(7, 1, 18, 1, '2017-04-06 19:00:00'),
 (8, 1, 23, 1, '2018-02-09 08:00:00'),
 (9, 1, 1, 1, '2017-07-10 10:00:00'),
 (10, 1, 14, 1, '2017-07-10 10:00:00'),
@@ -2600,7 +2624,14 @@ INSERT INTO `patient-history` (`patient-id`, `session-number`, `item-id`, `quant
 (7, 1, 138, 1, '2017-04-06 19:00:00'),
 (8, 1, 123, 1, '2018-02-09 08:30:00'),
 (9, 1, 137, 1, '2017-07-10 10:20:00'),
-(10, 1, 114, 1, '2017-07-10 11:00:00');
+(10, 1, 114, 1, '2017-07-10 11:00:00'),
+(4, 5, 103, 1, '2018-07-02 04:12:23'),
+(5, 6, 107, 1, '2018-07-02 04:14:14'),
+(2, 7, 101, 1, '2018-07-02 04:14:53'),
+(2, 8, 101, 1, '2018-07-02 04:15:06'),
+(3, 9, 105, 1, '2018-07-02 04:17:37'),
+(3, 10, 105, 1, '2018-07-02 04:17:48'),
+(7, 11, 109, 1, '2018-07-02 04:18:19');
 
 -- --------------------------------------------------------
 
@@ -2793,44 +2824,44 @@ INSERT INTO `rooms` (`room-id`, `department-id`, `room-type`, `status`) VALUES
 (5, 19, 'Executive Suite', 'Booked'),
 (6, 25, 'Executive Suite', 'Booked'),
 (7, 12, 'Twin Deluxe', 'Booked'),
-(8, 18, 'Twin Deluxe', 'Free'),
-(9, 2, 'Twin Deluxe', 'Free'),
-(10, 13, 'Twin Deluxe', 'Free'),
-(11, 20, 'Twin Deluxe', 'Free'),
-(12, 23, 'Twin Deluxe', 'Free'),
-(13, 13, 'Multi bed', 'Free'),
-(14, 27, 'Multi bed', 'Free'),
+(8, 18, 'Twin Deluxe', 'Booked'),
+(9, 2, 'Twin Deluxe', 'Booked'),
+(10, 13, 'Twin Deluxe', 'Booked'),
+(11, 20, 'Twin Deluxe', 'Booked'),
+(12, 23, 'Twin Deluxe', 'Booked'),
+(13, 13, 'Multi bed', 'Booked'),
+(14, 27, 'Multi bed', 'Booked'),
 (15, 3, 'Multi bed', 'Booked'),
 (16, 24, 'Multi bed', 'Booked'),
 (17, 15, 'Multi bed', 'Booked'),
 (18, 29, 'Multi bed', 'Booked'),
 (19, 5, 'Day Care', 'Booked'),
-(20, 5, 'Day Care', 'Booked'),
+(20, 5, 'Day Care', 'Free'),
 (21, 11, 'Day Care', 'Booked'),
-(22, 8, 'Day Care', 'Free'),
-(23, 6, 'Day Care', 'Free'),
+(22, 8, 'Day Care', 'Booked'),
+(23, 6, 'Day Care', 'Booked'),
 (24, 3, 'Day Care', 'Free'),
 (25, 27, 'Emergency Ward', 'Free'),
 (26, 3, 'Emergency Ward', 'Free'),
 (27, 23, 'Emergency Ward', 'Free'),
 (28, 6, 'Emergency Ward', 'Free'),
-(29, 2, 'Emergency Ward', 'Booked'),
-(30, 7, 'Emergency Ward', 'Booked'),
+(29, 2, 'Emergency Ward', 'Free'),
+(30, 7, 'Emergency Ward', 'Free'),
 (31, 20, 'HDU', 'Booked'),
 (32, 20, 'HDU', 'Booked'),
 (33, 25, 'HDU', 'Booked'),
 (34, 25, 'HDU', 'Booked'),
 (35, 13, 'HDU', 'Booked'),
 (36, 25, 'HDU', 'Free'),
-(37, 17, 'ICCU', 'Free'),
-(38, 29, 'ICCU', 'Free'),
+(37, 17, 'ICCU', 'Booked'),
+(38, 29, 'ICCU', 'Booked'),
 (39, 12, 'ICCU', 'Free'),
 (40, 22, 'ICCU', 'Free'),
 (41, 9, 'ICCU', 'Free'),
 (42, 2, 'ICCU', 'Free'),
 (43, 10, 'ICU', 'Booked'),
 (44, 2, 'ICU', 'Booked'),
-(45, 26, 'ICU', 'Booked'),
+(45, 26, 'ICU', 'Free'),
 (46, 26, 'ICU', 'Booked'),
 (47, 26, 'ICU', 'Booked'),
 (48, 17, 'ICU', 'Booked'),
@@ -2840,10 +2871,10 @@ INSERT INTO `rooms` (`room-id`, `department-id`, `room-type`, `status`) VALUES
 (52, 9, 'NICU', 'Free'),
 (53, 5, 'NICU', 'Free'),
 (54, 11, 'NICU', 'Free'),
-(55, 5, 'PICU', 'Free'),
-(56, 6, 'PICU', 'Free'),
-(57, 15, 'PICU', 'Booked'),
-(58, 19, 'PICU', 'Booked'),
+(55, 5, 'PICU', 'Booked'),
+(56, 6, 'PICU', 'Booked'),
+(57, 15, 'PICU', 'Free'),
+(58, 19, 'PICU', 'Free'),
 (59, 17, 'PICU', 'Booked'),
 (60, 7, 'PICU', 'Booked'),
 (61, 14, 'Private Deluxe', 'Booked'),
@@ -2914,7 +2945,7 @@ INSERT INTO `rooms` (`room-id`, `department-id`, `room-type`, `status`) VALUES
 (126, 7, 'Emergency Ward', 'Free'),
 (127, 6, 'Emergency Ward', 'Free'),
 (128, 4, 'Emergency Ward', 'Free'),
-(129, 4, 'Emergency Ward', 'Booked'),
+(129, 4, 'Emergency Ward', 'Free'),
 (130, 5, 'Emergency Ward', 'Booked'),
 (131, 12, 'HDU', 'Booked'),
 (132, 22, 'HDU', 'Booked'),
@@ -2940,8 +2971,8 @@ INSERT INTO `rooms` (`room-id`, `department-id`, `room-type`, `status`) VALUES
 (152, 23, 'NICU', 'Free'),
 (153, 28, 'NICU', 'Free'),
 (154, 26, 'NICU', 'Free'),
-(155, 18, 'PICU', 'Free'),
-(156, 13, 'PICU', 'Free'),
+(155, 18, 'PICU', 'Booked'),
+(156, 13, 'PICU', 'Booked'),
 (157, 3, 'PICU', 'Booked'),
 (158, 11, 'PICU', 'Booked'),
 (159, 7, 'PICU', 'Booked'),
@@ -2961,7 +2992,7 @@ INSERT INTO `rooms` (`room-id`, `department-id`, `room-type`, `status`) VALUES
 (173, 16, 'SICU', 'Booked'),
 (174, 23, 'SICU', 'Booked'),
 (175, 7, 'SICU', 'Booked'),
-(176, 12, 'SICU', 'Booked'),
+(176, 12, 'SICU', 'Free'),
 (177, 1, 'SICU', 'Booked'),
 (178, 2, 'SICU', 'Free'),
 (179, 26, '', 'Free'),
@@ -3480,7 +3511,16 @@ INSERT INTO `transactions` (`datetime`, `credit`, `debit`, `balance`, `details`)
 ('2018-07-01 17:12:32', 0, 200000, 15709500, '175'),
 ('2018-07-01 17:13:08', 0, 200000, 15674500, '195'),
 ('2018-07-01 17:13:35', 0, 200000, 15644500, '196'),
-('2018-07-01 17:16:33', 0, 200000, 15614500, '198');
+('2018-07-01 17:16:33', 0, 200000, 15614500, '198'),
+('2018-07-02 02:25:25', 2000, 0, 15616500, 'Bill'),
+('2018-07-02 02:27:31', 2000, 0, 15618500, 'Bill'),
+('2018-07-02 02:29:13', 2000, 0, 15620500, 'Bill'),
+('2018-07-02 02:30:29', 2000, 0, 15622500, 'Bill'),
+('2018-07-02 02:34:20', 0, 270000, 15352500, '17'),
+('2018-07-02 03:36:57', 500, 0, 15353000, 'Bill'),
+('2018-07-02 05:30:13', 0, 300000, 15053000, '10'),
+('2018-07-02 07:58:03', 0, 270000, 14783000, '20'),
+('2018-07-02 07:58:05', 0, 270000, 14513000, '20');
 
 -- --------------------------------------------------------
 
@@ -3802,7 +3842,20 @@ INSERT INTO `treatment-details` (`patient-id`, `doctor-id`, `session-number`, `d
 (298, 19, 1, '2018-07-01 13:10:42', 'Visiting'),
 (299, 20, 1, '2018-07-01 12:20:42', 'Visiting'),
 (300, 77, 1, '2018-07-01 13:20:02', 'Consulting'),
-(100, 50, 2, '2018-07-01 11:20:42', 'Consulting');
+(100, 50, 2, '2018-07-01 11:20:42', 'Consulting'),
+(309, 20, 3, '2018-07-02 03:00:08', 'Visiting'),
+(309, 20, 4, '2018-07-02 03:00:08', 'Visiting'),
+(4, 8, 5, '2018-07-01 22:42:23', 'Admitting'),
+(5, 1, 6, '2018-07-01 22:44:14', 'Admitting'),
+(2, 71, 7, '2018-07-01 22:44:53', 'Admitting'),
+(2, 71, 8, '2018-07-01 22:45:06', 'Admitting'),
+(3, 6, 9, '2018-07-01 22:47:37', 'Admitting'),
+(3, 6, 10, '2018-07-01 22:47:48', 'Admitting'),
+(7, 17, 11, '2018-07-01 22:48:19', 'Admitting'),
+(8, 33, 12, '2018-07-02 03:00:08', 'Visiting'),
+(8, 33, 13, '2018-07-02 03:00:08', 'Visiting'),
+(6, 67, 14, '2018-07-02 08:50:37', 'Visiting'),
+(6, 67, 15, '2018-07-02 08:50:39', 'Visiting');
 
 --
 -- Indexes for dumped tables
@@ -3821,6 +3874,7 @@ ALTER TABLE `admission-history`
 -- Indexes for table `attendance`
 --
 ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`id`,`date`),
   ADD KEY `id` (`id`);
 
 --
@@ -3909,7 +3963,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=311;
 
 --
 -- AUTO_INCREMENT for table `price-chart`

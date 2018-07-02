@@ -25,6 +25,10 @@ else
   $sql2 = "UPDATE `rooms` SET `status`='Free' where `room-id`='$bid'";
   if(mysqli_query($link, $sql2)){
     echo "The Room has been freed";
+    setcookie('room-free-status', 'true', time() + (5), "/"); // 86400 = 1 day
+    ?>
+    <script>window.location.reload(history.back());</script>
+    <?php
   } else{
     echo "ERROR: Could not able to execute $sql2. " . mysqli_error($link);$err=1;
   }
