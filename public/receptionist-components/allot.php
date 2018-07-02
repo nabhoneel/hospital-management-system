@@ -97,7 +97,7 @@
               <input type="date" class="form-control dob" onchange="resetColor(this)">
               <div class="alert alert-success alert-dismissible fade show" role="alert"></div>
               <br>
-              <button type="button" class="btn btn-success" onclick="saveNewPatient()">Save</button>
+              <button type="button" class="btn btn-success" onclick="saveNewPatient('new-patient-form')">Save</button>
               <button type="button" class="btn btn-error" onclick="togglePatientForm()">Cancel</button>
             </div>
           </div>

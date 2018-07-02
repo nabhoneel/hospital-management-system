@@ -130,8 +130,8 @@ togglePatientForm = function() {
   patientFormStatus = !patientFormStatus;
 };
 
-saveNewPatient = function() {
-  var patientFields = document.querySelectorAll('.new-patient-form .form-control');
+saveNewPatient = function(formName) {
+  var patientFields = document.querySelectorAll('.' + formName + ' .form-control');
   for (var i = 0; i < patientFields.length; i++) {
     if(patientFields[i].value == '') {
       patientFields[i].style.borderColor = 'red';
@@ -158,23 +158,37 @@ saveNewPatient = function() {
       method: 'post',
       data: JSON.stringify(data),
       success: function(response) {
-        document.querySelector('.new-patient-form .alert').style.display = 'block';
-        document.querySelector('.new-patient-form .alert').innerHTML = response;
+        document.querySelector('.' + formName + ' .alert').style.display = 'block';
+        document.querySelector('.' + formName + ' .alert').innerHTML = response;
 
         setTimeout(function() {
-          $('.new-patient-form .alert').fadeOut('slow');
+          $('.' + formName + ' .alert').fadeOut('slow');
           for (var i = 0; i < patientFields.length; i++) {
             if(i != 1) {
               patientFields[i].value = '';
             }
           }
-          togglePatientForm();
+          if(formName == 'new-patient-form') togglePatientForm();
         }, 3000);
 
-        document.querySelector('.patient-details .name').innerHTML = data.name;
-        document.querySelector('.patient-details .sex').innerHTML = data.sex;
-        document.querySelector('.patient-details .dob').innerHTML = data.dob;
-        document.querySelector('.patient-details .contact-number').innerHTML = data.contact;
+        if(formName == 'new-patient-form') {
+          document.querySelector('.patient-details .name').innerHTML = data.name;
+          document.querySelector('.patient-details .sex').innerHTML = data.sex;
+          document.querySelector('.patient-details .dob').innerHTML = data.dob;
+          document.querySelector('.patient-details .contact-number').innerHTML = data.contact;
+        }
+
+        if(formName == 'admit-new-patient-form') {
+          setAdmitPatientDetails(
+            '',
+            data.name,
+            data.sex,
+            data.dob,
+            data.address,
+            data.email,
+            data.contact
+          );
+        }
       },
       error: function(err) {
         console.log(err);
@@ -230,8 +244,6 @@ setEntryTime = function(e, id) {
         x = x.parentElement.parentElement.childNodes;
         console.log(x);
         x[11].childNodes[1].removeAttribute('disabled');
-        // x.parentElement.parentElement.childNodes[x.parentElement.parentElement.childNodes.length - 1].removeAttribute('disabled');
-        // .nextSibling.childNodes[0].removeAttribute('disabled');
         e.parentElement.innerHTML = response;
       },
       error: function(err) {
@@ -276,3 +288,103 @@ document.getElementById('staff-search').addEventListener('keyup', function() {
   staffSearch = this.value;
   setAttendanceList();
 });
+
+/*
+
+Patient admission
+
+*/
+
+setAdmitPatientDetails = function(id, name, sex, dob, address, email, contact) {
+  document.querySelector('.admit-patient-search-results').style.display = 'none';
+
+  document.querySelector('span.admit-patient-name').innerHTML = name;
+  document.querySelector('span.admit-patient-sex').innerHTML = sex;
+  document.querySelector('span.admit-patient-dob').innerHTML = dob;
+  document.querySelector('span.admit-patient-address').innerHTML = address;
+  document.querySelector('span.admit-patient-email').innerHTML = email;
+  document.querySelector('span.admit-patient-contact').innerHTML = contact;
+
+  if(id != '') {
+    document.querySelector('.complete-admit').addEventListener('click', function() {
+      data = {
+        patientID: id,
+        doctorID: document.querySelector('.admit-patient-doctor').value,
+        roomType: document.querySelector('.admit-patient-room-type').value
+      };
+      $.ajax({
+        url: "/hospital-system/api/patients/admit_patient.php",
+        type: 'post',
+        data: JSON.stringify(data),
+        success: function(response) {
+          document.querySelector('.admit-status').innerHTML = response;
+          id = '';
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+    });
+  } else {
+    console.log('nope');
+  }
+};
+
+document.getElementById('patient-search').addEventListener('keyup', function() {
+  if(this.value == '') document.querySelector('.admit-patient-search-results').style.display = 'none';
+  else document.querySelector('.admit-patient-search-results').style.display = 'block';
+  $.ajax({
+    url: "/hospital-system/api/patients/admit_patient_search.php",
+    type: 'post',
+    data: JSON.stringify({text: document.querySelector('#patient-search').value}),
+    success: function(response) {
+      document.querySelector('.admit-patient-search-results').innerHTML = response;
+    },
+    error: function(response) {
+      console.log(response);
+    }
+  });
+});
+
+/*
+
+Patients:
+
+*/
+
+reducePatientsList = function(e) {
+  var patients = document.querySelectorAll('.patients-list-panel ul li');
+  for(var i=0; i<patients.length; i++) {
+    patients[i].style.display = 'block';
+    if(patients[i].innerText.toLowerCase().indexOf(e.value.toLowerCase()) == -1) patients[i].style.display = 'none';
+  }
+};
+
+showPatientHistory = function(id) {
+  $.ajax({
+    url: "/hospital-system/api/patients/patient_history.php",
+    method: 'post',
+    data: JSON.stringify({id: id}),
+    success: function(response) {
+      document.querySelector('.patients .patients-details').innerHTML = response;
+    },
+    error: function(err) {
+      console.log(err);
+    }
+  });
+};
+
+discharge = function(id, total) {
+  $.ajax({
+    url: '/hospital-system/api/transactions/discharge.php',
+    method: 'post',
+    data: JSON.stringify({id: id, total: total}),
+    success: function(response) {
+      document.querySelector('.patients .alert-info').style.display = 'block';
+      document.querySelector('.patients .alert-info').innerHTML = response;
+    },
+    error: function(response) {
+      console.log(response);
+    }
+  });
+};

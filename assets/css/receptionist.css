@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-.allot, .attendance {
+.allot, .attendance, .admit, .patients {
   padding: 1em;
 }
 
@@ -36,7 +36,7 @@
   font-weight: 800;
 }
 
-.search-results {
+.search-results, .admit-patient-search-results {
   width: fit-content;
   border-left: 1px solid #dedede;
   border-right: 1px solid #dedede;
@@ -70,4 +70,34 @@
 
 .new-patient-form .alert {
   display: none;
+}
+
+.admit-patient-result {
+  text-align: left;
+  background: white;
+  border-radius: 5px;
+  width: 80%;
+  margin: auto;
+  padding: 2em;
+}
+
+.patients-list-panel {
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.custom-list li {
+  list-style-type: none;
+  padding: 10px;
+  text-align: left;
+}
+
+.custom-list li:hover {
+  background-color: darkgray;
+  cursor: pointer;
+}
+
+.patient-details {
+  height: 80vh;
+  overflow-y: scroll;
 }
