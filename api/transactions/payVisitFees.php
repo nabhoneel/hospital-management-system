@@ -9,7 +9,7 @@ $staff = new Transactions($db->connect());
 //Get raw posted JSON data:
 $data = json_decode(file_get_contents("php://input"));
 
-$state = $staff->discharge($data->id, $data->total);
+$state = $staff->payVisitFees($data->slot, $data->id, $data->fees);
 
-if($state == true) echo 'Discharged successfully';
-else echo 'Error while discharging';
+if($state == true) echo 'Payment successful';
+else echo 'Error while payment';

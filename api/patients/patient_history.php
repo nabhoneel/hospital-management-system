@@ -42,10 +42,25 @@ if($bill != false) {
       <td colspan="5" style="text-align: right;">Total amount: &#x20B9;<?php echo $totalAmount; ?></td>
     </tr>
   </table>
-  <button class="btn btn-info" onclick="discharge('<?php echo $data->id; ?>', '<?php echo $totalAmount; ?>')">Discharge</button>
+  <button class="btn btn-info" onclick="discharge('<?php echo $data->id; ?>', '<?php echo $totalAmount; ?>')">Pay and Discharge</button>
   <?php
 
 }
 
-$history = $patients->get_history($data->id);
+$visit = $patients->get_visit_details($data->id);
+if($visit != false) {
+  if($visit['fees'] != null) {
+    ?>
+    <br>
+    <table class="table">
+      <tr>
+        <td><?php echo $visit['doctor']; ?></td>
+        <td><?php echo $visit['fees']; ?></td>
+        <td><?php echo $visit['datetime']; ?></td>
+      </tr>
+    </table>
+    <button class="btn btn-primary" onclick = "payVisitFees('<?php echo $visit['slot']; ?>', '<?php echo $visit['doctorID']; ?>', '<?php echo $visit['fees']; ?>')">Pay</button>
+    <?php
+  }
+}
 ?>

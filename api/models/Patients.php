@@ -97,6 +97,34 @@ class Patients {
   }
 
   public function get_history($id) {
-    
+
+  }
+
+  public function get_visit_details($id) {
+    $query = 'SELECT `doctor-id`, `datetime` FROM `treatment-details` WHERE `patient-id` = ' . $id . ' AND `doctor-type` = "Visiting" ORDER BY `datetime` DESC LIMIT 1';
+    $result = $this->conn->query($query);
+    $result = $result->fetch_assoc();
+    $doctorID = $result['doctor-id'];
+    $time = $result['datetime'];
+
+    $query = 'SELECT `name` FROM `staff-details` WHERE `id` = ' . $doctorID;
+    $name = $this->conn->query($query);
+    if(!$name) return false;
+    $name = $name->fetch_assoc();
+    $name = $name['name'];
+
+    $query = 'SELECT `visit-fees`, `datetime`, MIN(ABS(`datetime` - "' . $time . '")) FROM `doctor-schedule` WHERE `id` = ' . $doctorID . ' AND `status` = "booked"';
+    $fees = $this->conn->query($query);
+    $fees = $fees->fetch_assoc();
+    $date = $fees['datetime'];
+    $fees = $fees['visit-fees'];
+
+    return array(
+      'doctorID' => $doctorID,
+      'doctor' => $name,
+      'fees' => $fees,
+      'datetime' => $time,
+      'slot' => $date
+    );
   }
 }

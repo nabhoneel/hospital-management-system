@@ -11,7 +11,7 @@ $treatment = new TreatmentDetails($db->connect());
 //Get raw posted JSON data:
 $data = json_decode(file_get_contents("php://input"));
 
-$treatment_status = $treatment->add_detail($data->patientID, $data->doctorID, 'single visit');
+$treatment_status = $treatment->add_detail($data->patientID, $data->doctorID, 'Visiting');
 $doctor_status = $doctors->book($data->doctorID, $data->slot);
 if($treatment_status && $doctor_status) : ?>
 

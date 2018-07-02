@@ -22,9 +22,9 @@
       <a class="nav-link" id="v-pills-patients-tab" data-toggle="pill" href="#v-pills-patients" role="tab" aria-controls="v-pills-patients" aria-selected="false">
         <i class="fas fa-user-clock"></i>
       </a>
-      <a class="nav-link" id="v-pills-doctors-tab" data-toggle="pill" href="#v-pills-doctors" role="tab" aria-controls="v-pills-doctors" aria-selected="false">
+      <!-- <a class="nav-link" id="v-pills-doctors-tab" data-toggle="pill" href="#v-pills-doctors" role="tab" aria-controls="v-pills-doctors" aria-selected="false">
         <i class="fas fa-user-md"></i>
-      </a>
+      </a> -->
       <a class="nav-link" id="v-pills-attendance-tab" data-toggle="pill" href="#v-pills-attendance" role="tab" aria-controls="v-pills-attendance" aria-selected="false">
         <i class="fas fa-list-ul"></i>
       </a>
@@ -45,9 +45,9 @@
       <div class="tab-pane fade" id="v-pills-patients" role="tabpanel" aria-labelledby="v-pills-patients-tab">
         <?php include_once('receptionist-components/patients.php'); ?>
       </div>
-      <div class="tab-pane fade" id="v-pills-doctors" role="tabpanel" aria-labelledby="v-pills-doctors-tab">
-        <?php include_once('receptionist-components/doctors.php'); ?>
-      </div>
+      <!-- <div class="tab-pane fade" id="v-pills-doctors" role="tabpanel" aria-labelledby="v-pills-doctors-tab">
+        <?php // include_once('receptionist-components/doctors.php'); ?>
+      </div> -->
       <div class="tab-pane fade" id="v-pills-attendance" role="tabpanel" aria-labelledby="v-pills-attendance-tab">
         <?php include_once('receptionist-components/attendance.php'); ?>
       </div>

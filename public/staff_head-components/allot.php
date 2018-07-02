@@ -29,7 +29,7 @@ $temp = $db->connect();
 </style>
 
 <h3>Free allotted Rooms</h3><br>
-<form action="trans_disc.php" method="post">
+<form action="/hospital-system/public/staff_head-components/trans_disc.php" method="post">
   <p>
     <label for="ARec">Bed No/Patient:</label>
     <select name="arec" id="ARec">
@@ -55,7 +55,7 @@ $temp = $db->connect();
 <br><br>
 
 <h3>Allocate Nurse</h3>
-<form action="allot_nurse.php" method="post">
+<form action="/hospital-system/public/staff_head-components/allot_nurse.php" method="post">
   <div class="allot">
     <div class="row">
       <div class="available-doctors col-3"></div>
@@ -114,7 +114,7 @@ $temp = $db->connect();
 
   <br><br>
   <h3>Free Booked Nurse</h3>
-  <form action="<?php get_homeurl(); ?>/public/staff_head-components/free_nurse.php" method="post">
+  <form action="/hospital-system/public/staff_head-components/free_nurse.php" method="post">
     <div class="allot">
       <div class="row">
         <div class="available-doctors col-3"></div>

@@ -388,3 +388,18 @@ discharge = function(id, total) {
     }
   });
 };
+
+payVisitFees = function(slot, doctorID, fees) {
+  $.ajax({
+    url: '/hospital-system/api/transactions/payVisitFees.php',
+    method: 'post',
+    data: JSON.stringify({slot: slot, id: doctorID, fees: fees}),
+    success: function(response) {
+      document.querySelector('.patients .alert-info').style.display = 'block';
+      document.querySelector('.patients .alert-info').innerHTML = response;
+    },
+    error: function(err) {
+      console.log(err);
+    }
+  })
+}

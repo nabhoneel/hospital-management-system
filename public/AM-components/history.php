@@ -75,7 +75,7 @@
                     if ($a == 0) {
                       echo "<td>" . "Debit" . "</td>"; }
                     else {
-                      echo "<td>" . "Debit" . "</td>";
+                      echo "<td>" . "Credit" . "</td>";
                     }
                     echo "<td>" . $row['balance'] . "</td>";
                     echo "<td>" . $row['details'] . "</td>";
